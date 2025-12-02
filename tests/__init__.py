@@ -1,3 +1,3 @@
 """
-Test suite for cv-cue-wrapper.
+Test suite for cv-cue-api.
 """

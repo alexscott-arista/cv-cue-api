@@ -6,7 +6,7 @@ import pytest
 import pickle
 from unittest.mock import Mock, MagicMock, patch
 from pathlib import Path
-from cv_cue_wrapper.cv_cue_client import CVCueClient
+from cv_cue_api.cv_cue_client import CVCueClient
 
 
 class TestCVCueClientInitialization:
@@ -154,7 +154,7 @@ class TestCVCueClientSessionManagement:
         client.clear_session()
         assert not temp_session_file.exists()
 
-    @patch('cv_cue_wrapper.cv_cue_client.pickle.load')
+    @patch('cv_cue_api.cv_cue_client.pickle.load')
     def test_load_session_corrupted_file(self, mock_pickle_load, mock_env_vars, temp_session_file):
         """Test loading corrupted session file."""
         # Create a file
@@ -220,7 +220,7 @@ class TestCVCueClientSessionValidation:
 class TestCVCueClientLogin:
     """Test login functionality."""
 
-    @patch('cv_cue_wrapper.cv_cue_client.CVCueClient.request')
+    @patch('cv_cue_api.cv_cue_client.CVCueClient.request')
     def test_login_success(self, mock_request, mock_env_vars, temp_session_file):
         """Test successful login."""
         # Ensure temp session file doesn't exist
@@ -310,7 +310,7 @@ class TestCVCueClientResourceRegistry:
 
     def test_register_resource(self):
         """Test registering a resource."""
-        from cv_cue_wrapper.resources.base import BaseResource
+        from cv_cue_api.resources.base import BaseResource
 
         # Create a test resource
         @BaseResource.register('test_resource')
@@ -363,7 +363,7 @@ class TestCVCueClientContextManager:
         # Session should be closed after exiting context
         # (Hard to test directly, but at least verify no errors)
 
-    @patch('cv_cue_wrapper.cv_cue_client.CVCueClient.close')
+    @patch('cv_cue_api.cv_cue_client.CVCueClient.close')
     def test_context_manager_calls_close(self, mock_close, mock_env_vars, temp_session_file):
         """Test that context manager calls close."""
         with CVCueClient(session_file=temp_session_file) as client:

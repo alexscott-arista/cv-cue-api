@@ -1,11 +1,11 @@
-# CV-CUE Wrapper CLI Usage Guide
+# CloudVision CUE CLI Usage Guide
 
-The cv-cue-wrapper provides a Docker-like command-line interface with hierarchical subcommands.
+The cv-cue-api cli tool provides a Docker-like command-line interface with hierarchical subcommands.
 
 ## Command Structure
 
 ```
-cv-cue-wrapper [GLOBAL OPTIONS] COMMAND [SUBCOMMAND] [OPTIONS]
+cv-cue-api [GLOBAL OPTIONS] COMMAND [SUBCOMMAND] [OPTIONS]
 ```
 
 ## Global Options
@@ -18,21 +18,21 @@ cv-cue-wrapper [GLOBAL OPTIONS] COMMAND [SUBCOMMAND] [OPTIONS]
 Create a new session with the CV-CUE API:
 
 ```bash
-cv-cue-wrapper session login
+cv-cue-api session login
 ```
 
 ### Check Session Status
 Check if your current session is active:
 
 ```bash
-cv-cue-wrapper session status
+cv-cue-api session status
 ```
 
 ### Clear Session Cache
 Clear the cached session file:
 
 ```bash
-cv-cue-wrapper session clear
+cv-cue-api session clear
 ```
 
 ## Managed Devices Commands
@@ -41,27 +41,27 @@ cv-cue-wrapper session clear
 
 Basic usage:
 ```bash
-cv-cue-wrapper managed-devices list-aps
+cv-cue-api managed-devices list-aps
 ```
 
 With pagination:
 ```bash
-cv-cue-wrapper managed-devices list-aps --pagesize 50 --startindex 100
+cv-cue-api managed-devices list-aps --pagesize 50 --startindex 100
 ```
 
 With simple filters:
 ```bash
-cv-cue-wrapper managed-devices list-aps --active true --model AP-555
+cv-cue-api managed-devices list-aps --active true --model AP-555
 ```
 
 With multiple values for same filter:
 ```bash
-cv-cue-wrapper managed-devices list-aps --model AP-555 --model AP-635
+cv-cue-api managed-devices list-aps --model AP-555 --model AP-635
 ```
 
 With advanced filters:
 ```bash
-cv-cue-wrapper managed-devices list-aps \
+cv-cue-api managed-devices list-aps \
   --filter name:contains:Arista \
   --filter name:contains:5D:BF \
   --filter-operator AND
@@ -79,39 +79,39 @@ Available filter operators:
 
 Table output format:
 ```bash
-cv-cue-wrapper managed-devices list-aps --output table --pagesize 20
+cv-cue-api managed-devices list-aps --output table --pagesize 20
 ```
 
 Compact output (just names and MACs):
 ```bash
-cv-cue-wrapper managed-devices list-aps --output compact
+cv-cue-api managed-devices list-aps --output compact
 ```
 
 With total count:
 ```bash
-cv-cue-wrapper managed-devices list-aps --total-count --output table
+cv-cue-api managed-devices list-aps --total-count --output table
 ```
 
 Sorting:
 ```bash
-cv-cue-wrapper managed-devices list-aps --sortby name --descending
+cv-cue-api managed-devices list-aps --sortby name --descending
 ```
 
 ### Get All Access Points
 
 Fetch all devices across all pages:
 ```bash
-cv-cue-wrapper managed-devices get-all-aps
+cv-cue-api managed-devices get-all-aps
 ```
 
 Just get the count:
 ```bash
-cv-cue-wrapper managed-devices get-all-aps --output count
+cv-cue-api managed-devices get-all-aps --output count
 ```
 
 With filters:
 ```bash
-cv-cue-wrapper managed-devices get-all-aps \
+cv-cue-api managed-devices get-all-aps \
   --filter name:contains:AP \
   --active true \
   --output count
@@ -121,13 +121,13 @@ cv-cue-wrapper managed-devices get-all-aps \
 
 ### Example 1: Login and list devices in table format
 ```bash
-cv-cue-wrapper session login
-cv-cue-wrapper managed-devices list-aps --output table --pagesize 10
+cv-cue-api session login
+cv-cue-api managed-devices list-aps --output table --pagesize 10
 ```
 
 ### Example 2: Find all Arista devices with specific model
 ```bash
-cv-cue-wrapper managed-devices list-aps \
+cv-cue-api managed-devices list-aps \
   --filter name:contains:Arista \
   --model AP-555 \
   --output table \
@@ -136,12 +136,12 @@ cv-cue-wrapper managed-devices list-aps \
 
 ### Example 3: Get total count of active devices
 ```bash
-cv-cue-wrapper managed-devices get-all-aps --active true --output count
+cv-cue-api managed-devices get-all-aps --active true --output count
 ```
 
 ### Example 4: Complex filtering with multiple conditions
 ```bash
-cv-cue-wrapper managed-devices list-aps \
+cv-cue-api managed-devices list-aps \
   --filter name:contains:Test \
   --filter active:equals:true \
   --filter-operator AND \
@@ -151,7 +151,7 @@ cv-cue-wrapper managed-devices list-aps \
 
 ### Example 5: Verbose mode for debugging
 ```bash
-cv-cue-wrapper -v managed-devices list-aps --pagesize 5
+cv-cue-api -v managed-devices list-aps --pagesize 5
 ```
 
 ## Environment Variables

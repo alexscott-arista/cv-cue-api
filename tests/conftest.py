@@ -1,5 +1,5 @@
 """
-Pytest configuration and fixtures for cv-cue-wrapper tests.
+Pytest configuration and fixtures for cv-cue-api tests.
 """
 
 import pytest

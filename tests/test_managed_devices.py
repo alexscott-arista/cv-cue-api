@@ -4,8 +4,8 @@ Tests for ManagedDevicesResource class.
 
 import pytest
 from unittest.mock import call
-from cv_cue_wrapper.resources.managed_devices import ManagedDevicesResource
-from cv_cue_wrapper.resources.filters import Filter, FilterBuilder
+from cv_cue_api.resources.managed_devices import ManagedDevicesResource
+from cv_cue_api.resources.filters import Filter, FilterBuilder
 
 
 class TestManagedDevicesResource:

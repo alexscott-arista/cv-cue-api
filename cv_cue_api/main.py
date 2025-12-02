@@ -69,7 +69,7 @@ def status(ctx):
                 click.echo(click.style("✓ Session is active", fg="green"))
             else:
                 click.echo(click.style("✗ Session is not active", fg="yellow"))
-                click.echo("Run 'cv-cue-wrapper session login' to create a new session")
+                click.echo("Run 'cv-cue-api session login' to create a new session")
     except Exception as e:
         click.echo(click.style(f"✗ Error checking session: {e}", fg="red"), err=True)
         sys.exit(1)

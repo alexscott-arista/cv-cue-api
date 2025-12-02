@@ -4,7 +4,7 @@ Tests for Filter and FilterBuilder classes.
 
 import pytest
 import json
-from cv_cue_wrapper.resources.filters import Filter, FilterBuilder
+from cv_cue_api.resources.filters import Filter, FilterBuilder
 
 
 class TestFilter:

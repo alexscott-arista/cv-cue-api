@@ -85,7 +85,7 @@ class ManagedDevicesResource(BaseResource):
             >>> print(f"Found {len(devices['managedDevices'])} devices")
 
         Example (advanced filters):
-            >>> from cv_cue_wrapper.resources.filters import FilterBuilder
+            >>> from cv_cue_api.resources.filters import FilterBuilder
             >>> fb = FilterBuilder("AND")
             >>> fb.contains("name", "Arista").contains("name", "5D:BF")
             >>> devices = client.managed_devices.list_aps(

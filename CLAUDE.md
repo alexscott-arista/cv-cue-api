@@ -4,7 +4,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Project Overview
 
-cv-cue-wrapper is a Python SDK and CLI tool for interacting with the CV-CUE API (Arista CloudVision CUE WiFi management platform). It provides both a programmatic interface and a Docker-like command-line tool.
+cv-cue-api is a Python SDK and CLI tool for interacting with the CV-CUE API (Arista CloudVision CUE WiFi management platform). It provides both a programmatic interface and a Docker-like command-line tool.
 
 ## Development Commands
 
@@ -35,20 +35,20 @@ poetry run pytest tests/test_cv_cue_client.py::TestCVCueClientInitialization
 poetry run pytest tests/test_cv_cue_client.py::TestCVCueClientInitialization::test_init_with_parameters
 
 # Run tests with coverage
-poetry run pytest --cov=cv_cue_wrapper
+poetry run pytest --cov=cv_cue_api
 ```
 
 ### CLI Usage
 ```bash
 # Run CLI directly
-poetry run cv-cue-wrapper --help
+poetry run cv-cue-api --help
 
 # Test session management
-poetry run cv-cue-wrapper session status
-poetry run cv-cue-wrapper session login
+poetry run cv-cue-api session status
+poetry run cv-cue-api session login
 
 # Test managed devices commands
-poetry run cv-cue-wrapper managed-devices list-aps --output table
+poetry run cv-cue-api managed-devices list-aps --output table
 ```
 
 ## Architecture
@@ -97,7 +97,7 @@ fb.contains("name", "Arista").equals("active", True)
 
 The CLI uses Click with hierarchical command groups (Docker-like):
 ```
-cv-cue-wrapper
+cv-cue-api
 ├── session (login, status, clear)
 └── managed-devices (list-aps, get-all-aps)
 ```
@@ -132,7 +132,7 @@ Tests use pytest with extensive mocking:
 
 To add a new API resource (e.g., "networks"):
 
-1. Create `cv_cue_wrapper/resources/networks.py`:
+1. Create `cv_cue_api/resources/networks.py`:
    ```python
    from .base import BaseResource
 
@@ -142,7 +142,7 @@ To add a new API resource (e.g., "networks"):
            return self._request('GET', '/networks', params=kwargs)
    ```
 
-2. Import in `cv_cue_wrapper/resources/__init__.py`:
+2. Import in `cv_cue_api/resources/__init__.py`:
    ```python
    from .networks import NetworksResource
    __all__ = [..., 'NetworksResource']
@@ -165,8 +165,8 @@ Use `.env.example` as template. The `.session` file is git-ignored and contains 
 ## Important Files
 
 - `README.md` - CLI usage guide with examples and command reference
-- `cv_cue_wrapper/cv_cue_client.py` - Core client with session management
-- `cv_cue_wrapper/resources/filters.py` - Filter and FilterBuilder classes
-- `cv_cue_wrapper/resources/managed_devices.py` - Managed devices (access points) resource
-- `cv_cue_wrapper/main.py` - Click-based CLI implementation
+- `cv_cue_api/cv_cue_client.py` - Core client with session management
+- `cv_cue_api/resources/filters.py` - Filter and FilterBuilder classes
+- `cv_cue_api/resources/managed_devices.py` - Managed devices (access points) resource
+- `cv_cue_api/main.py` - Click-based CLI implementation
 - `tests/conftest.py` - Test fixtures and configuration
